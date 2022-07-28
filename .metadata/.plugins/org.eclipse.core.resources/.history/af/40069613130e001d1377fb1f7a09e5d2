@@ -1,0 +1,23 @@
+class Demo
+{
+	void addProduct()
+	{
+		System.out.println("This is addProduct");
+	}
+	void addCategory()
+	{
+		
+	}
+	void addStaff()
+	{
+		
+	}
+}
+public class Sample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

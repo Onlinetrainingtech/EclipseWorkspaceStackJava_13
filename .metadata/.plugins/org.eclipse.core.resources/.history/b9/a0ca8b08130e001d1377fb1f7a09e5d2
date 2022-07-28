@@ -1,0 +1,19 @@
+class Demo
+{
+	void addProduct()
+	{
+		
+	}
+	void addCategory()
+	{
+		
+	}
+}
+public class Sample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
