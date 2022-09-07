@@ -4,8 +4,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.awt.event.ActionEvent;
 
 public class AdminLogin extends JFrame {
 
@@ -63,12 +70,48 @@ public class AdminLogin extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Submit");
-		btnNewButton.setBounds(89, 205, 89, 23);
-		contentPane.add(btnNewButton);
+		JButton submitbtn = new JButton("Submit");
+		JButton resetbtn = new JButton("Reset");
+		submitbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					String u1=textField.getText();
+					String p1=textField_1.getText();
+					
+					String str1="select * from adminlogin";
+					Class.forName("org.h2.Driver");
+					Connection conn=DriverManager.getConnection("jdbc:h2:tcp://localhost/~/javab13","sa","");
+					Statement stmt=conn.createStatement();
+					ResultSet rs=stmt.executeQuery(str1);
+					rs.next();
+					String adminu1=rs.getString(1);
+					String passp1=rs.getString(2);
+					
+					if(adminu1.equals(u1)&&passp1.equals(p1))
+					{
+						new AdminHomePage().setVisible(true);
+						JOptionPane.showMessageDialog(submitbtn,"LoginSucess!!!");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(resetbtn, "LoginFail!!!");
+					}
+					
+					
+				}
+				catch(Exception t)
+				{
+					System.out.println(t);
+				}
+			}
+		});
+		submitbtn.setBounds(89, 205, 89, 23);
+		contentPane.add(submitbtn);
 		
-		JButton btnNewButton_1 = new JButton("Reset");
-		btnNewButton_1.setBounds(245, 205, 89, 23);
-		contentPane.add(btnNewButton_1);
+		
+		resetbtn.setBounds(245, 205, 89, 23);
+		contentPane.add(resetbtn);
 	}
 }
