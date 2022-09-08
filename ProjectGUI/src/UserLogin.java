@@ -4,8 +4,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.awt.event.ActionEvent;
 
 public class UserLogin extends JFrame {
 
@@ -59,21 +66,55 @@ public class UserLogin extends JFrame {
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Password");
-		lblNewLabel_2.setBounds(24, 130, 46, 14);
+		JLabel lblNewLabel_2 = new JLabel("UserName");
+		lblNewLabel_2.setBounds(24, 130, 75, 14);
 		panel.add(lblNewLabel_2);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(109, 124, 158, 23);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
-		
+		JButton resetbtn = new JButton("Reset");
 		JButton btnNewButton = new JButton("Submit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				try
+				{
+					String uid1=textField.getText();
+					String uname1=textField_1.getText();
+					
+					String str1="select * from userreg";
+					Class.forName("org.h2.Driver");
+					Connection conn=DriverManager.getConnection("jdbc:h2:tcp://localhost/~/javab13","sa","");
+					Statement stmt=conn.createStatement();
+					ResultSet rs=stmt.executeQuery(str1);
+					rs.next();
+					String userid=rs.getString(1);
+					String username=rs.getString(2);
+					
+					if(userid.equals(uid1)&&username.equals(uname1))
+					{
+						new UserLoginHomePage().setVisible(true);
+						JOptionPane.showMessageDialog(btnNewButton,"LoginSucess!!!");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(resetbtn,"LoginFail!!!");
+					}
+					
+				}
+				catch(Exception t)
+				{
+					
+				}
+			}
+		});
 		btnNewButton.setBounds(62, 185, 89, 23);
 		panel.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Reset");
-		btnNewButton_1.setBounds(211, 185, 89, 23);
-		panel.add(btnNewButton_1);
+		
+		resetbtn.setBounds(211, 185, 89, 23);
+		panel.add(resetbtn);
 	}
 }

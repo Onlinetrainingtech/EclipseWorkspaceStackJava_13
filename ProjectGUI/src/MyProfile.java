@@ -67,6 +67,9 @@ public class MyProfile extends JFrame {
 		JButton btnNewButton = new JButton("Update");
 		btnNewButton.setBounds(165, 209, 89, 23);
 		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Search");
+		btnNewButton_1.setBounds(284, 209, 89, 23);
+		contentPane.add(btnNewButton_1);
 	}
-
 }

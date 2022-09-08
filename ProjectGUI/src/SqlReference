@@ -7,3 +7,7 @@ select * from adminlogin
 create table product(pid integer,pname varchar(100),price integer)
 
 select * from product
+
+create table userreg(userid varchar(100),uname varchar(100),emailid varchar(100))
+
+select * from userreg

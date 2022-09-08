@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UserLoginHomePage extends JFrame {
 
@@ -43,6 +45,12 @@ public class UserLoginHomePage extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("MyProfile");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new MyProfile().setVisible(true);
+			}
+		});
 		btnNewButton.setBounds(162, 95, 89, 23);
 		contentPane.add(btnNewButton);
 	}
